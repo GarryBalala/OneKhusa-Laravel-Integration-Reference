@@ -1,4 +1,4 @@
-# OneKhusa Laravel Integration Reference
+# OneKhusa Request to Pay Laravel Integration Reference
 
 > **A complete, production-ready reference implementation of OneKhusa Payment Gateway integration using Laravel 11 & PHP 8.2+**
 
