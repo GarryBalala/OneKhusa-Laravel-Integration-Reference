@@ -188,17 +188,13 @@ OneKhusa-Laravel-Integration-Reference/
 │   │   ├── Controllers/
 │   │   │   ├── TicketController.php      # Purchase & status endpoints
 │   │   │   └── WebhookController.php     # OneKhusa callback handler
-│   │   └── Middleware/
-│   │       └── VerifyWebhookSignature.php# Webhook verification
 │   │
 │   └── Services/
 │       └── OneKhusaService.php           # Core integration logic
 │
 ├── resources/
 │   ├── views/
-│   │   └── welcome.blade.php             # Dashboard UI
-│   └── js/
-│       └── payment-polling.js            # Frontend status checker
+│      └── welcome.blade.php             # Dashboard UI
 │
 ├── routes/
 │   ├── web.php                           # Web routes (dashboard)
