@@ -419,26 +419,7 @@ php artisan cache:clear
 
 - [Laravel Documentation](https://laravel.com/docs/11.x)
 - [OneKhusa API Documentation](https://onekhusa.com/docs)
-- [Guzzle HTTP Client](https://docs.guzzlephp.org/)
 - [NGrok Documentation](https://ngrok.com/docs)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Commit changes: `git commit -am 'Add new feature'`
-4. Push to branch: `git push origin feature/my-feature`
-5. Submit a pull request
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
@@ -450,7 +431,3 @@ For issues or questions:
 - Open an issue on GitHub
 
 ---
-
-**Last Updated:** May 15, 2026  
-**Maintained by:** GarryBalala  
-**Current Version:** 1.0.0
