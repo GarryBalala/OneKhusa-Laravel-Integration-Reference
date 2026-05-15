@@ -20,30 +20,29 @@ class OneKhusaService
     {
         $callbackBase = env('PUBLIC_CALLBACK_URL');
 
-        $payload = [
-            "authentication" => [
-                "apiKey" => env('ONEKHUSA_API_KEY'),
-                "apiSecret" => env('ONEKHUSA_API_SECRET')
-            ],
-            "merchant" => [
-                "organisationId" => env('ONEKHUSA_ORG_ID'),
-                "merchantAccountNumber" => (int)env('ONEKHUSA_MERCHANT_NUMBER')
-            ],
-            "payment" => [
-                "sourceReferenceNumber" => $reference,
-                "description" => "OneTicket Laravel Purchase",
-                "amount" => (float)$amount
-            ],
-            "route" => [
-                "successRedirectionUrl" => "$callbackBase/?ref=$reference",
-                "failureRedirectionUrl" => "$callbackBase/?ref=$reference",
-                "callbackApiUrl" => "$callbackBase/api/webhooks/payments"
-            ]
-        ];
+        $payload = new \stdClass();
+        $payload->authentication = new \stdClass();
+        $payload->authentication->apiKey = env('ONEKHUSA_API_KEY');
+        $payload->authentication->apiSecret = env('ONEKHUSA_API_SECRET');
 
-        $response = Http::withHeaders([
-            'X-Idempotency-Key' => 'PHP-CHK-' . $reference . '-' . Str::random(8)
-        ])->post($this->checkoutUrl, $payload);
+        $payload->merchant = new \stdClass();
+        $payload->merchant->organisationId = env('ONEKHUSA_ORG_ID');
+        $payload->merchant->merchantAccountNumber = (int)env('ONEKHUSA_MERCHANT_NUMBER');
+
+        $payload->payment = new \stdClass();
+        $payload->payment->sourceReferenceNumber = $reference;
+        $payload->payment->description = "OneTicket Laravel Purchase";
+        $payload->payment->amount = (float)$amount;
+
+        $payload->route = new \stdClass();
+        $payload->route->successRedirectionUrl = "$callbackBase/?ref=$reference";
+        $payload->route->failureRedirectionUrl = "$callbackBase/?ref=$reference";
+        $payload->route->callbackApiUrl = "$callbackBase/api/webhooks/payments";
+
+        $headers = new \stdClass();
+        $headers->{'X-Idempotency-Key'} = 'PHP-CHK-' . $reference . '-' . Str::random(8);
+
+        $response = Http::withHeaders((array)$headers)->post($this->checkoutUrl, (array)$payload);
 
         if ($response->failed()) {
             throw new \Exception("OneKhusa API Error: " . $response->body());
